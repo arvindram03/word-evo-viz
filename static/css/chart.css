@@ -1,0 +1,33 @@
+.bar {
+  fill: #4682B4;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.bar-color {
+  fill: brown;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.sector, .node {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.bar:hover, .sector:hover, .node:hover {
+  opacity: 0.8;
+}
+
+.axis {
+	font: 8px;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+}
+
+.link {
+  stroke: #eee;
+}
