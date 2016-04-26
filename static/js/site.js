@@ -7,10 +7,10 @@ function fetchTextClassData() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       var chart = {
                 "data":JSON.parse(xhttp.responseText),
-                "selector":".scatter-text",
+                "selector":".cluster-plot",
                 "xAxisTitle":"newX",
                 "yAxisTitle":"newY",
-                "title":"Review Text Classification(+ve, -ve) using LSA with tf-idf",
+                "title":"Word Evolution ScatterPlot",
               };
       // console.log(xhttp.responseText);
         drawScatter(chart);
