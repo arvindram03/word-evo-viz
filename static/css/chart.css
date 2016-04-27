@@ -31,3 +31,16 @@
 .link {
   stroke: #eee;
 }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background-color: #ddd;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #777;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

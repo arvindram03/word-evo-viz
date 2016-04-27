@@ -132,7 +132,22 @@ function drawScatter(chart) {
 		});
 		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
-  	onSliderEvent(1900, chart, x, y)
+  	div.append("input")
+	    		.attr("id","forceSlider")
+	    		.attr("type","range")
+	    		.attr("min",1900)        
+	    		.attr("max",2005)
+	    		.attr("step",5)
+	    		.attr("value",1900)
+	    		.on("change",function(){
+						// drawForceGraph(chart,this.value);
+						onSliderEvent(1900, chart, x, y)
+					})
+	    		.style("width",xAxisLen+"px")
+	    		.style("margin-top",(margin.top)/2+"px")
+	    		.style("margin-left",(margin.left)+"px")
+	    		.style("margin-bottom",(margin.bottom/8)+"px")
+  	// onSliderEvent(1900, chart, x, y)
 }
 
 function onSliderEvent(e, chart, x, y) {
