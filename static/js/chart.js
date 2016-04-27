@@ -1,3 +1,8 @@
+var change = function(){
+						// drawForceGraph(chart,this.value);
+						// onSliderEvent(1900, chart, x, y);
+						console.log("here");
+					};
 function drawScatter(chart) {
 	var div = d3.select(chart.selector);
 	div.selectAll("*").remove();
@@ -139,10 +144,7 @@ function drawScatter(chart) {
 	    		.attr("max",2005)
 	    		.attr("step",5)
 	    		.attr("value",1900)
-	    		.on("change",function(){
-						// drawForceGraph(chart,this.value);
-						onSliderEvent(1900, chart, x, y)
-					})
+	    		.on("change",change)
 	    		.style("width",xAxisLen+"px")
 	    		.style("margin-top",(margin.top)/2+"px")
 	    		.style("margin-left",(margin.left)+"px")

@@ -36,4 +36,9 @@ function increment() {
   curYear += 5;
   var timeSlider = document.getElementById("timeSlider");
   timeSlider.value = curYear;
+  // document.getElementById("timeSlider").onchange();
+  // timeSlider.onchange();
+  // console.log(document.getElementById("timeSlider"));
+  d3.select("#timeSlider").each(change);
+  // $("#timeSlider").val(curYear).change();
 }
