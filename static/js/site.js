@@ -20,3 +20,20 @@ function fetchTextClassData() {
   xhttp.send();
 
 }
+var curYear = 1900;
+function play() {
+  if (timeSlider.value < 2005) {
+    var i;
+    for (i=1;i<=21;i++) {
+      setTimeout(function() {
+        increment();
+      },i*1000);  
+    }
+  }
+}
+
+function increment() {
+  curYear += 5;
+  var timeSlider = document.getElementById("timeSlider");
+  timeSlider.value = curYear;
+}

@@ -133,7 +133,7 @@ function drawScatter(chart) {
 		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
   	div.append("input")
-	    		.attr("id","forceSlider")
+	    		.attr("id","timeSlider")
 	    		.attr("type","range")
 	    		.attr("min",1900)        
 	    		.attr("max",2005)
