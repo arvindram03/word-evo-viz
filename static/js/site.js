@@ -1,11 +1,11 @@
+var chart = {};
 fetchTextClassData();
-
 function fetchTextClassData() {
-  var word = "accident"
+  var word = "mouse"
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      var chart = {
+      chart = {
                 "data":JSON.parse(xhttp.responseText),
                 "selector":".cluster-plot",
                 "xAxisTitle":"newX",
@@ -13,7 +13,7 @@ function fetchTextClassData() {
                 "title":"Word Evolution ScatterPlot",
               };
       // console.log(xhttp.responseText);
-        drawScatter(chart);
+        drawScatter();
     }
   };
   xhttp.open("GET", "/word?q="+word, true);
@@ -27,7 +27,7 @@ function play() {
     for (i=1;i<=21;i++) {
       setTimeout(function() {
         increment();
-      },i*1000);  
+      },i*1000);
     }
   }
 }
@@ -39,6 +39,6 @@ function increment() {
   // document.getElementById("timeSlider").onchange();
   // timeSlider.onchange();
   // console.log(document.getElementById("timeSlider"));
-  d3.select("#timeSlider").each(change);
+  d3.select("#timeSlider").each(function() {change(curYear)});
   // $("#timeSlider").val(curYear).change();
 }
