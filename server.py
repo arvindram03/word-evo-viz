@@ -44,13 +44,21 @@ def get_word_cloud_weights():
 	data_folder2 = "./data/words"
 	files = {}
 	for subdirname in os.listdir(data_folder1):
-		files[subdirname.split("_")[0]] = randint(0,9)
+		files[subdirname.split("_")[0]] = randint(10,30)
 	for subdirname in os.listdir(data_folder2):
-		files[subdirname.split("_")[0]] = randint(0,9)
+		files[subdirname.split("_")[0]] = randint(10,30)
 
+	cloud = []
+	for key in files:
+		tmp = {}
+		tmp["text"] = key
+		tmp["size"] = files[key]
+		cloud.append(tmp)
 	# keys = files.keys()
 	# print len(files.keys())
-	return Response(response=json.dumps(files), mimetype="application/json")
+
+	return Response(response=json.dumps(cloud), mimetype="application/json")
+	# return cloud
 
 @app.route('/')
 def index():
