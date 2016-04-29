@@ -29,10 +29,11 @@
 }
 .mid {
     height: 650px;
-    background: #eee;
+    /*background: #eee;*/
 }
 .cluster-plot {
 	height: 625px;
+    background: #eee;
 }
 
 .dimension-plot {

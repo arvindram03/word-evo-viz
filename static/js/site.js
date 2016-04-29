@@ -22,23 +22,41 @@ function fetchTextClassData() {
 }
 var curYear = 1900;
 function play() {
-  if (timeSlider.value < 2005) {
+  if (curYear < 2005) {
     var i;
     for (i=1;i<=21;i++) {
       setTimeout(function() {
         increment();
       },i*1000);
     }
+  }else {
+    curYear = 1900;
   }
 }
 
 function increment() {
+
   curYear += 5;
-  var timeSlider = document.getElementById("timeSlider");
-  timeSlider.value = curYear;
+  console.log("here", curYear);
+  // var timeSlider = document.getElementById("timeSlider");
+  // timeSlider.value = curYear;
   // document.getElementById("timeSlider").onchange();
   // timeSlider.onchange();
   // console.log(document.getElementById("timeSlider"));
-  d3.select("#timeSlider").each(function() {change(curYear)});
+  // change(curYear);
+  var slid = d3.select('#slider');
+  slid.selectAll("*").remove();
+  slid.call(
+  d3.slider()
+  .axis(d3.svg.axis().ticks(20).tickFormat(d3.format("d")))
+  .min(1900)
+  .max(2005)
+  .step(5)
+  .value(curYear)
+  .on("slide", function(evt, value) {
+     change(value); 
+  }));
+  change(curYear);
+  // d3.select("#timeSlider").each(function() {change(curYear)});
   // $("#timeSlider").val(curYear).change();
 }

@@ -1,9 +1,8 @@
-var change = function(year){
+function change(year){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
 	//Complete repetition
 	//TODO: find a way to write it clearly
-
 	var div = d3.select(chart.selector);
 	var dim = {height: div.style("height").slice(0,-2), width: div.style("width").slice(0,-2)};
 	var margin = {top: dim.height/10, right: dim.height/20, bottom: dim.height/5, left: dim.height/5};
@@ -31,9 +30,13 @@ var change = function(year){
   	y.domain([d3.min(points_data, function(d){return d.y})-1, d3.max(points_data, function(d){return d.y})+1]);
 
 	var target = d3.selectAll(".target");
-	old_x = x(chart.data.timeseries[year-5].x);
-	old_y = y(chart.data.timeseries[year-5].y);
-
+	if (year > 1900) {
+		old_x = x(chart.data.timeseries[year-5].x);
+		old_y = y(chart.data.timeseries[year-5].y);
+	}else {
+		old_x = x(chart.data.timeseries[1900].x);
+		old_y = y(chart.data.timeseries[1900].y);
+	}
 	line_data = [];
 
 	// for(yr in chart.data.timeseries) {
@@ -80,6 +83,7 @@ var change = function(year){
 };
 
 function drawScatter() {
+	// var sliderDiv = d3.select("#slider");
 	var div = d3.select(chart.selector);
 	div.selectAll("*").remove();
 	div.attr('id','scatterChart');
@@ -89,6 +93,18 @@ function drawScatter() {
 	yAxisLen = (dim.height - margin.top - margin.bottom);
 	var x = d3.scale.linear().range([0, xAxisLen]);
 	var y = d3.scale.linear().range([yAxisLen, 0]);
+	// div.append("input")
+	//     		.attr("id","timeSlider")
+	//     		.attr("type","range")
+	//     		.attr("min",1900)
+	//     		.attr("max",2005)
+	//     		.attr("step",5)
+	//     		.attr("value",1900)
+	//     		.on("change",change)
+	//     		.style("width",xAxisLen+"px")
+	//     		.style("margin-top",(margin.top)/2+"px")
+	//     		.style("margin-left",(margin.left)+"px")
+	//     		.style("margin-bottom",(margin.bottom/8)+"px")
 	var points_data = [];
 	for(idx in chart.data.other_words) {
 		tmp = {};
@@ -229,29 +245,20 @@ function drawScatter() {
 		});
 		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
-  	div.append("input")
-	    		.attr("id","timeSlider")
-	    		.attr("type","range")
-	    		.attr("min",1900)
-	    		.attr("max",2005)
-	    		.attr("step",5)
-	    		.attr("value",1900)
-	    		.on("change",change)
-	    		.style("width",xAxisLen+"px")
-	    		.style("margin-top",(margin.top)/2+"px")
-	    		.style("margin-left",(margin.left)+"px")
-	    		.style("margin-bottom",(margin.bottom/8)+"px")
+  	
   	// onSliderEvent(1900, chart, x, y)
 }
+d3.select('#slider').call(
+  d3.slider()
+  .axis(d3.svg.axis().ticks(20).tickFormat(d3.format("d")))
+  .min(1900)
+  .max(2005)
+  .step(5)
+  .value(1900)
+  .on("slide", function(evt, value) {
+     change(value); 
+  }));
 
-function onSliderEvent(e, chart, x, y) {
-	var target = d3.selectAll(".target");
-	console.log(e)
-	console.log(x(chart.data.timeseries[e.toString()].x), y(chart.data.timeseries[e.toString()].y))
-	target.attr("transform", "translate("+ x(chart.data.timeseries[e].x) + "," +  y(chart.data.timeseries[e].y) + ")")
-	if(e < 2005) {
-		setTimeout(function() {
-			onSliderEvent(e+5, chart, x, y)
-		}, 2000);
-	}
-}
+	// .on("slide", function(evt, value) {
+ //  		change();	
+	// }));
