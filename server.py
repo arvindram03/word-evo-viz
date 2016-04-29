@@ -4,6 +4,9 @@ from flask import Flask
 import json
 import pickle
 
+import os
+from random import randint
+
 app = Flask(__name__, static_url_path='/static')
 
 @app.route('/word')
@@ -34,6 +37,20 @@ def get_word_data():
 	resp["timeseries"]	= word_coords
 
 	return Response(response=json.dumps(resp), mimetype="application/json")
+
+@app.route('/word_cloud')
+def get_word_cloud_weights():
+	data_folder1 = "./data/sample"
+	data_folder2 = "./data/words"
+	files = {}
+	for subdirname in os.listdir(data_folder1):
+		files[subdirname.split("_")[0]] = randint(0,9)
+	for subdirname in os.listdir(data_folder2):
+		files[subdirname.split("_")[0]] = randint(0,9)
+
+	# keys = files.keys()
+	# print len(files.keys())
+	return Response(response=json.dumps(files), mimetype="application/json")
 
 @app.route('/')
 def index():
