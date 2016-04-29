@@ -259,7 +259,3 @@ var gSlider = d3.slider()
   }).animate(1000);
 gSlider = gSlider.value(1900);
 d3.select('#slider').call(gSlider);
-
-	// .on("slide", function(evt, value) {
- //  		change();	
-	// }));
