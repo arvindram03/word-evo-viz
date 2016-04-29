@@ -20,12 +20,13 @@
       </nav>
 <div class="container-fluid">
     <div class="row col-lg-12">
-      
+
       <div class="col-lg-12">
         <!-- <div class="slider"> -->
         <div class="row">
         <div class="col-lg-3">
-          <h3 class="center-text">Pick a Word</h3>
+          <h3 class="center-text">Pick or Type a Word</h3>
+          <input type="text" class="form-control" id="word-input" placeholder="Type word like gay, tape, etc" value=""><span><button class="btn btn-info btn-group-justified" type="button" onclick="wordInput();">Show</button></span>
         </div>
         <div class="col-lg-9">
           <div class="col-lg-1">
@@ -35,15 +36,15 @@
           </span>
         </div>
         <div class="col-lg-11">
-          <div id="slider"></div>  
+          <div id="slider"></div>
         </div>
         <br>
         <br>
         <br>
-        </div>  
         </div>
-        
-        
+        </div>
+
+
         <div class="row">
           <div class="col-lg-3">
             <div class="wordCloud"></div>
@@ -51,7 +52,7 @@
           <div class="cluster-plot col-lg-9"></div>
         </div>
       </div>
-      
+
       </div>
 </div>
  <script src="static/js/d3.slider.js"></script>

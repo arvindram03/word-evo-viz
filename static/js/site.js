@@ -23,6 +23,12 @@ function fetchTextClassData(word) {
 
 }
 
+function wordInput() {
+  // var textField = d3.select("#word-input");
+  word = document.getElementById("word-input").value;
+  fetchTextClassData(word);
+}
+
 function fetchWords() {
   var word = "god"
   var xhttp = new XMLHttpRequest();
@@ -55,7 +61,7 @@ function play() {
 function increment() {
   curYear += 5;
   gSlider.value(curYear);
-  change(curYear);  
+  change(curYear);
 }
 function draw(words) {
     var div = d3.select(".wordCloud");
@@ -97,4 +103,3 @@ function generateWordCloud(word_list) {
       .start();
   }
 
-  
