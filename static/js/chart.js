@@ -80,6 +80,7 @@ function change(year){
 		  .transition()
 		  .duration(1000).ease("basis")
 		  .attr("transform", "translate("+ new_x + "," + new_y + ")");
+	target.select("text").text(function(d) {return chart.data.word + "," + year});
 };
 
 function drawScatter() {
@@ -208,7 +209,7 @@ function drawScatter() {
 	  .attr("dx","0.5em")
 	  .attr("dy","-0.5em")
 	  // .style("visibility","hidden")
-	  .text(function(d) { return chart.data.word; });
+	  .text(function(d) { return chart.data.word + "," + 1900; });
 
 	var points = plot.selectAll(".points")
       .data(chart.data.other_words)
@@ -248,16 +249,16 @@ function drawScatter() {
   	
   	// onSliderEvent(1900, chart, x, y)
 }
-d3.select('#slider').call(
-  d3.slider()
+var gSlider = d3.slider()
   .axis(d3.svg.axis().ticks(20).tickFormat(d3.format("d")))
   .min(1900)
   .max(2005)
   .step(5)
-  .value(1900)
   .on("slide", function(evt, value) {
      change(value); 
-  }));
+  }).animate(1000);
+gSlider = gSlider.value(1900);
+d3.select('#slider').call(gSlider);
 
 	// .on("slide", function(evt, value) {
  //  		change();	
