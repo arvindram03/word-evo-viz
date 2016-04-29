@@ -1,7 +1,9 @@
 * {
   border-radius: 0 !important;
 }
-
+body {
+    background: #fff;
+}
 .navbar-brand
 {
     width: 100%;
@@ -9,17 +11,25 @@
     top: 0;
     text-align: center;
     margin: auto;
-    color: #111;
+    color: #fff !important;
 }
 
 .navbar-brand > img {
     display: inline;
 }
 
-.navbar-inverse .navbar-brand {
-    color: #eee;
+/*.navbar-inverse .navbar-brand{
+
+    color:#fff !important;
+}*/
+.navbar-inverse {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
 }
 
+.center-text {
+    text-align: center;
+}
 .navbar {
 	margin-top: 3px;
 }
@@ -33,17 +43,16 @@
 }
 .cluster-plot {
 	height: 625px;
-    background: #eee;
+    /*background: #fff;*/
+}
+.wordCloud {
+    width: 300px;
+    height: 625px;
+    /*background: #fff;*/
 }
 
-.dimension-plot {
-    height: 625px;
-}
 
-.scatter, .scatter-text {
-    height: 625px;
-    background: #eee;
-}
+
 
 .axisTitle,.title {
 	text-transform: capitalize;

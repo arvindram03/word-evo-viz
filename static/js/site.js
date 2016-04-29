@@ -1,8 +1,9 @@
 var chart = {};
-fetchTextClassData();
+
+fetchTextClassData("god");
 fetchWords();
-function fetchTextClassData() {
-  var word = "god"
+function fetchTextClassData(word) {
+  // var word = "god"
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -31,7 +32,7 @@ function fetchWords() {
       generateWordCloud(words);
     }
   };
-  xhttp.open("GET", "/word_cloud"+word, true);
+  xhttp.open("GET", "/word_cloud", true);
   xhttp.send();
 
 }
@@ -42,10 +43,12 @@ function play() {
     for (i=1;i<=21;i++) {
       setTimeout(function() {
         increment();
-      },i*1000);
+      },i*timeDuration);
     }
   }else {
     curYear = 1900;
+    // d3.selectAll(".plot").select("path").remove();
+    play();
   }
 }
 
@@ -55,12 +58,14 @@ function increment() {
   change(curYear);  
 }
 function draw(words) {
+    var div = d3.select(".wordCloud");
+    var dim = {height: div.style("height").slice(0,-2), width: div.style("width").slice(0,-2)};
     var fill = d3.scale.category20();
-    d3.select("#wordCloud").append("svg")
-        .attr("width", 300)
-        .attr("height", 300)
+    d3.select(".wordCloud").append("svg")
+        .attr("width", dim.width)
+        .attr("height", dim.height)
       .append("g")
-        .attr("transform", "translate(150,150)")
+        .attr("transform", "translate("+dim.width/2+","+dim.height/2+")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
@@ -71,13 +76,19 @@ function draw(words) {
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
+        .on("click",function(d){
+            fetchTextClassData(d.text)
+        })
         .text(function(d) { return d.text; });
 }
 
 function generateWordCloud(word_list) {
   var fill = d3.scale.category20();
-
-  d3.layout.cloud().size([300, 300])
+  var div = d3.select(".wordCloud");
+  var dim = {height: div.style("height").slice(0,-2), width: div.style("width").slice(0,-2)};
+  d3.layout.cloud()
+      .size([dim.width, dim.height])
+      // .canvas(function() { return new Canvas(1, 1); })
       .words(word_list)
       .rotate(function() { return ~~(Math.random() * 2) * 90; })
       .font("Impact")

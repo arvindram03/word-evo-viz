@@ -1,3 +1,4 @@
+var timeDuration = 222;
 function change(year){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
@@ -72,13 +73,13 @@ function change(year){
       .attr("stroke-dasharray", totalLength + " " + totalLength)
       .attr("stroke-dashoffset", totalLength)
       .transition()
-        .duration(1000)
+        .duration(222)
         .ease("basis")
         .attr("stroke-dashoffset", 0);
 
 	target
 		  .transition()
-		  .duration(1000).ease("basis")
+		  .duration(222).ease("basis")
 		  .attr("transform", "translate("+ new_x + "," + new_y + ")");
 	target.select("text").text(function(d) {return chart.data.word + "," + year});
 };
@@ -126,30 +127,33 @@ function drawScatter() {
 	var palette = d3.scale.category20();
     var xAxis = d3.svg.axis()
 	    .scale(x)
-	    .orient("bottom");
+	    .orient("bottom")
+	    .ticks(0)
+	    .tickFormat("");
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left")
-	    .ticks(10);
+	    .ticks(0)
+	    .tickFormat("");
 
     var plotArea = div.append("svg");
-		plotArea.append("g").append("text")
-				.attr("class","axisTitle")
-	            .attr("text-anchor", "middle")
-	            .attr("transform", "translate("+ (margin.left/3) +","+(dim.height/2)+") rotate(-90)")
-	            .text(chart.yAxisTitle);
+		// plotArea.append("g").append("text")
+		// 		.attr("class","axisTitle")
+	 //            .attr("text-anchor", "middle")
+	 //            .attr("transform", "translate("+ (margin.left/3) +","+(dim.height/2)+") rotate(-90)")
+	 //            .text(chart.yAxisTitle);
 
-	     plotArea.append("g").append("text")
-	     		.attr("class","axisTitle")
-	            .attr("text-anchor", "middle")
-	            .attr("transform", "translate("+ (dim.width/2) +","+(dim.height-(margin.bottom/2))+")")
-	            .text(chart.xAxisTitle);
+	 //     plotArea.append("g").append("text")
+	 //     		.attr("class","axisTitle")
+	 //            .attr("text-anchor", "middle")
+	 //            .attr("transform", "translate("+ (dim.width/2) +","+(dim.height-(margin.bottom/2))+")")
+	 //            .text(chart.xAxisTitle);
 
 	    plotArea.append("g").append("text")
 	     		.attr("class","title")
-	            .attr("text-anchor", "middle")
-	            .attr("transform", "translate("+ (dim.width/2) +","+margin.top/2+")")
+	            .attr("text-anchor", "start")
+	            .attr("transform", "translate("+ (xAxisLen/2) +","+margin.top/2+")")
 	            .text(chart.title);
 
 	var plot = plotArea.attr("width", dim.width)
@@ -165,9 +169,6 @@ function drawScatter() {
 		.attr("transform", "translate(0," +  yAxisLen + ")")
 	    .call(xAxis)
 	    .selectAll("text")
-	    .attr("transform", "rotate(45)")
-	    .attr("dx", "1em")
-	    .style("text-anchor","start");
 
 	plot.append("g")
 		.attr("class","axis")
@@ -256,6 +257,6 @@ var gSlider = d3.slider()
   .step(5)
   .on("slide", function(evt, value) {
      change(value); 
-  }).animate(1000);
+  }).animate(222);
 gSlider = gSlider.value(1900);
 d3.select('#slider').call(gSlider);
