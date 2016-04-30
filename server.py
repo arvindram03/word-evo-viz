@@ -28,8 +28,15 @@ def perform_kmeans(data, k=4):
 def check_outlier(model, data):
 	a = [data["2005"]["x"], data["2005"]["y"]]
 	dist = []
-	for b in model.cluster_centers_:
-		dist.append(str(np.linalg.norm(a-b)))
+	for i in xrange(len(model.cluster_centers_)):
+		b = model.cluster_centers_[i]
+		dist.append({str(i): str(np.linalg.norm(a-b))})
+
+	for i in range(0, len(model.cluster_centers_)):
+		for j in range(i+1, len(model.cluster_centers_)):
+			a = model.cluster_centers_[i]
+			b = model.cluster_centers_[j]
+			dist.append({str(i)+str(j) :str(np.linalg.norm(a-b))})
 	return dist
 
 
