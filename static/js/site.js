@@ -1,7 +1,11 @@
 var chart = {};
+var is_playing = false;
+var curYear = 1900;
+var interval;
 
 fetchTextClassData("god");
 fetchWords();
+
 function fetchTextClassData(word) {
   // var word = "god"
   var xhttp = new XMLHttpRequest();
@@ -42,26 +46,53 @@ function fetchWords() {
   xhttp.send();
 
 }
-var curYear = 1900;
-function play() {
-  if (curYear < 2005) {
-    var i;
-    for (i=1;i<=21;i++) {
-      setTimeout(function() {
-        increment();
-      },i*timeDuration);
-    }
-  }else {
-    curYear = 1900;
-    // d3.selectAll(".plot").select("path").remove();
+
+function togglePlay() {
+  if(is_playing) {
+    reset();
+  } else {
     play();
   }
+}
+
+function reset() {
+  d3.select(".plot").selectAll(".trace").remove();
+  stopAnimation();
+  is_playing = false;
+  curYear = 1900;
+  gSlider.value(curYear);
+  change(curYear);
+}
+
+function play() {
+  d3.select(".plot").selectAll(".trace").remove();
+  if (curYear < 2005) {
+    startAnimation();
+  }else {
+    curYear = 1900;
+    d3.select(".plot").selectAll(".trace").remove();
+    play();
+  }
+}
+
+function startAnimation() {
+  is_playing = true;
+  interval = setInterval(function() {
+                                  increment();
+                                }, timeDuration);
+}
+
+function stopAnimation() {
+  clearInterval(interval);
 }
 
 function increment() {
   curYear += 5;
   gSlider.value(curYear);
   change(curYear);
+  if(curYear == 2005) {
+    stopAnimation();
+  }
 }
 function draw(words) {
     var div = d3.select(".wordCloud");

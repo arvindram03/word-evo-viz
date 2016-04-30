@@ -1,5 +1,5 @@
 var timeDuration = 222;
-function change(year){
+function change(year, remove_path = false){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
 	//Complete repetition
@@ -61,22 +61,25 @@ function change(year){
       .x(function(d) {return d.x;})
       .y(function(d) {return d.y;})
 
-	var path = d3.selectAll(".plot").append("path")
-      .attr("d", line(line_data))
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", "4")
-      .attr("fill", "none");
 
-    var totalLength = path.node().getTotalLength();
+    if (remove_path) {
+    	d3.select(".plot").selectAll(".trace").remove();
+    } else {
+    	var path = d3.selectAll(".plot").append("path")
+    		.attr("class", "trace")
+      		.attr("d", line(line_data))
+      		.attr("stroke", "steelblue")
+      		.attr("stroke-width", "4")
+      		.attr("fill", "none");
 
-    path
-      .attr("stroke-dasharray", totalLength + " " + totalLength)
-      .attr("stroke-dashoffset", totalLength)
-      .transition()
-        .duration(222)
-        .ease("basis")
-        .attr("stroke-dashoffset", 0);
-
+    	var totalLength = path.node().getTotalLength();
+    	path.attr("stroke-dasharray", totalLength + " " + totalLength)
+			.attr("stroke-dashoffset", totalLength)
+			.transition()
+			.duration(222)
+			.ease("basis")
+			.attr("stroke-dashoffset", 0);
+    }
 	target
 		  .transition()
 		  .duration(222).ease("basis")
@@ -184,7 +187,7 @@ function drawScatter() {
         .attr("r", 5)
         .attr("cx", 0)
         .attr("cy", 0)
-        .style("fill", function(d) {return palette(16);});
+        .style("fill", function(d) {return palette("9");});
 
     var target = plot.selectAll(".target");
     target.attr("transform", "translate("+ x(chart.data.timeseries[1900].x) + "," +  y(chart.data.timeseries[1900].y) + ")")
@@ -257,7 +260,7 @@ var gSlider = d3.slider()
   .max(2005)
   .step(5)
   .on("slide", function(evt, value) {
-     change(value);
+     change(value, true);
   }).animate(222);
 gSlider = gSlider.value(1900);
 d3.select('#slider').call(gSlider);
