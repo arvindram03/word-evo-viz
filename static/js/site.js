@@ -20,6 +20,7 @@ function fetchTextClassData(word) {
               };
       // console.log(xhttp.responseText);
         drawScatter();
+        // togglePlay();
     }
   };
   xhttp.open("GET", "/word?q="+word, true);
@@ -50,8 +51,10 @@ function fetchWords() {
 function togglePlay() {
   if(is_playing) {
     reset();
+    document.getElementById("play-button").className = "glyphicon glyphicon-play";
   } else {
     play();
+    document.getElementById("play-button").className = "glyphicon glyphicon-refresh";
   }
 }
 
