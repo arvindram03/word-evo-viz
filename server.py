@@ -27,6 +27,10 @@ def perform_kmeans(data, k=4):
 
 @app.route('/outlier')
 def outlier_check():
+	if os.path.exists("data/outlier.json"):
+		with open("data/outlier.json", "r") as f:
+			return Response(response=f.read(), mimetype="application/json")
+
 	words = get_all_words()
 	target_words = []
 	outlier_data = {}
@@ -60,6 +64,8 @@ def outlier_check():
 			target_words.append(word)
 
 	resp = {"outlier": outlier_data, "target_words": target_words}
+	with open("data/outlier.json", "w") as f:
+		f.write(json.dumps(resp))
 
 	return Response(response=json.dumps(resp), mimetype="application/json")
 
@@ -123,7 +129,7 @@ def get_word_cloud_weights():
 
 @app.route('/spark.html')
 def index():
-    return app.send_static_file('spark.html')    
+    return app.send_static_file('spark.html')
 
 
 @app.route('/')
