@@ -3,11 +3,22 @@ from flask import Flask, request, Response
 from flask import Flask
 import json
 import pickle
+from sklearn.cluster import KMeans
 
 import os
 from random import randint
+from collections import Counter
 
 app = Flask(__name__, static_url_path='/static')
+
+# Run kmeans clustering iteratively with k=4
+def perform_kmeans(data, k=4):
+	kmeans_data = [[point["x"], point["y"]] for point in data]
+	print kmeans_data
+	kmeans = KMeans(n_clusters = k, n_jobs = 2)
+	kmeans.fit(kmeans_data)
+	# print "perform_kmeans", Counter(kmeans.labels_)
+	return kmeans
 
 @app.route('/word')
 def get_word_data():
@@ -24,6 +35,10 @@ def get_word_data():
 	for word in other_words:
 		other_coords.append({"word":word[-1],"x":word[0]*scaling_factor,"y":word[1]*scaling_factor})
 
+	kmeans = perform_kmeans(other_coords)
+	# c = Counter(kmeans.labels_)
+	for i in xrange(len(other_coords)):
+		other_coords[i]['c'] = str(kmeans.labels_[i])
 	resp["other_words"]	= other_coords
 
 	timeseries = word_data[2]

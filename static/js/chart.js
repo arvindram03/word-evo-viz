@@ -124,7 +124,7 @@ function drawScatter() {
 
 	x.domain([d3.min(points_data, function(d){return d.x})-1, d3.max(points_data, function(d){return d.x})+1]);
   	y.domain([d3.min(points_data, function(d){return d.y})-1, d3.max(points_data, function(d){return d.y})+1]);
-	var palette = d3.scale.category20();
+	var palette = d3.scale.category10();
     var xAxis = d3.svg.axis()
 	    .scale(x)
 	    .orient("bottom")
@@ -182,11 +182,9 @@ function drawScatter() {
 		.attr("class", "target")
 		.append("circle")
         .attr("r", 5)
-        // .attr("cx", function(d){return x(chart.data.timeseries["1900"].x);})
-        // .attr("cy", function(d){return y(chart.data.timeseries["1900"].y);})
         .attr("cx", 0)
         .attr("cy", 0)
-        .style("fill", function(d) {return palette(0);});
+        .style("fill", function(d) {return palette(16);});
 
     var target = plot.selectAll(".target");
     target.attr("transform", "translate("+ x(chart.data.timeseries[1900].x) + "," +  y(chart.data.timeseries[1900].y) + ")")
@@ -225,8 +223,7 @@ function drawScatter() {
       .attr("r", 5)
       .attr("cx", function(d){return x(d.x);})
       .attr("cy", function(d){return y(d.y);})
-      .style("fill", function(d) {return palette(6);})
-      console.log(palette(6));
+      .style("fill", function(d) {return palette(d.c);})
 
 	 points.append("text")
 	  .attr("x",function(d){return x(d.x);})
