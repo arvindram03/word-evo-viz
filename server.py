@@ -54,7 +54,7 @@ def outlier_check():
 					if target_dist >= max(points_dist):
 						count += 1
 
-			outlier_data[word].append({year: str(target_dist_sum)})
+			outlier_data[word].append({"x": year, "y": str(target_dist_sum)})
 
 		if count == 4:
 			target_words.append(word)
