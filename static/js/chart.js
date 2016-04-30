@@ -136,11 +136,27 @@ function drawScatter() {
 	    .outerTickSize(0)
 	    .tickFormat("");
 
+	var xAxis_top = d3.svg.axis()
+	    .scale(x)
+	    .orient("top")
+	    .ticks(4)
+	    .innerTickSize(0)
+	    .outerTickSize(0)
+	    .tickFormat("");
+
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left")
 	    .ticks(2)
 	    .innerTickSize(-xAxisLen)
+	    .outerTickSize(0)
+	    .tickFormat("");
+
+	var yAxis_right = d3.svg.axis()
+	    .scale(y)
+	    .orient("right")
+	    .ticks(2)
+	    .innerTickSize(0)
 	    .outerTickSize(0)
 	    .tickFormat("");
 
@@ -179,7 +195,17 @@ function drawScatter() {
 
 	plot.append("g")
 		.attr("class","axis")
+	    .call(xAxis_top)
+	    .selectAll("text")
+
+	plot.append("g")
+		.attr("class","axis")
 	    .call(yAxis);
+
+	plot.append("g")
+		.attr("class","axis")
+		.attr("transform", "translate(" + xAxisLen + " ,0)")
+	    .call(yAxis_right);
 
 	plot.append("g")
 		.attr("class", "target")
