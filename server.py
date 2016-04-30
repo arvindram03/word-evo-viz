@@ -128,15 +128,16 @@ def get_word_cloud_weights():
 	return Response(response=json.dumps(cloud), mimetype="application/json")
 
 @app.route('/spark.html')
-def index():
+def spark():
     return app.send_static_file('spark.html')
 
-
-@app.route('/')
-def spark():
+@app.route('/index.html')
+def index():
     return app.send_static_file('index.html')
 
-
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
