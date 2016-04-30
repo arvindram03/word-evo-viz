@@ -61,7 +61,6 @@ function change(year, remove_path = false){
       .x(function(d) {return d.x;})
       .y(function(d) {return d.y;})
 
-
     if (remove_path) {
     	d3.select(".plot").selectAll(".trace").remove();
     } else {
@@ -69,8 +68,9 @@ function change(year, remove_path = false){
     		.attr("class", "trace")
       		.attr("d", line(line_data))
       		.attr("stroke", "steelblue")
-      		.attr("stroke-width", "4")
-      		.attr("fill", "none");
+      		.attr("stroke-width", "3")
+      		.attr("fill", "none")
+      		.style("opacity", 0.3);
 
     	var totalLength = path.node().getTotalLength();
     	path.attr("stroke-dasharray", totalLength + " " + totalLength)
