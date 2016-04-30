@@ -26,13 +26,19 @@
         <div class="row">
         <div class="col-lg-3">
           <h3 class="center-text">Pick or Type a Word</h3>
-          <input type="text" class="form-control" id="word-input" placeholder="Type word like gay, tape, etc" value=""><span><button class="btn btn-info btn-group-justified" type="button" onclick="wordInput();">Show</button></span>
+          <div class="input-group">
+            <input type="text" class="form-control" id="word-input" placeholder="Type word like gay, tape, etc" value="">
+            <span class="input-group-btn">
+              <button class="btn btn-info btn-group-justified" type="button" onclick="wordInput();">Show</button>
+            </span>
+          </div>
+          <br>
         </div>
         <div class="col-lg-9">
           <div class="col-lg-1">
           <span class="form-group">
             <button class="btn btn-info btn-group-justified" type="button" onclick="togglePlay();">
-            <span class="glyphicon glyphicon-play" aria-hidden="true"></button>
+            <span id = "play-button" class="glyphicon glyphicon-play" aria-hidden="true"></button>
           </span>
         </div>
         <div class="col-lg-11">
