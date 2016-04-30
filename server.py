@@ -1,21 +1,22 @@
 from flask import Flask, request, Response
 
-from flask import Flask
+import os
 import json
 import pickle
+from collections import Counter
+from random import randint
+
 from sklearn.cluster import KMeans
 from sklearn.cluster import DBSCAN
 
-import os
-from random import randint
-from collections import Counter
+import numpy as np
 
 app = Flask(__name__, static_url_path='/static')
 
 # Run kmeans clustering iteratively with k=4
 def perform_kmeans(data, k=4):
 	cluster_data = [[point["x"], point["y"]] for point in data]
-	kmeans = KMeans(n_clusters = k, n_jobs = 2)
+	kmeans = KMeans(n_clusters = k, n_jobs = 1)
 	kmeans.fit(cluster_data)
 	return kmeans
 
@@ -23,6 +24,14 @@ def perform_kmeans(data, k=4):
 # 	cluster_data = [[point["x"], point["y"]] for point in data]
 # 	db = DBSCAN(eps=0.3, min_samples=5).fit(cluster_data)
 # 	return db
+
+def check_outlier(model, data):
+	a = [data["2005"]["x"], data["2005"]["y"]]
+	dist = []
+	for b in model.cluster_centers_:
+		dist.append(str(np.linalg.norm(a-b)))
+	return dist
+
 
 @app.route('/word')
 def get_word_data():
@@ -39,10 +48,10 @@ def get_word_data():
 	for word in other_words:
 		other_coords.append({"word":word[-1],"x":word[0]*scaling_factor,"y":word[1]*scaling_factor})
 
-	cluster_output = perform_kmeans(other_coords)
-	# cluster_output = perform_dbscan(other_coords)
+	model = perform_kmeans(other_coords)
+	# model = perform_dbscan(other_coords)
 	for i in xrange(len(other_coords)):
-		other_coords[i]['c'] = str(cluster_output.labels_[i])
+		other_coords[i]['c'] = str(model.labels_[i])
 	resp["other_words"]	= other_coords
 
 	timeseries = word_data[2]
@@ -53,6 +62,7 @@ def get_word_data():
 		# word_coords[year_data[0]] = (year_data[1],year_data[2])
 		word_coords[year_data[0]] = {"x":year_data[1]*scaling_factor,"y":year_data[2]*scaling_factor}
 
+	resp["outlier"] = check_outlier(model, word_coords)
 	resp["timeseries"]	= word_coords
 
 	return Response(response=json.dumps(resp), mimetype="application/json")
