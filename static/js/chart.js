@@ -128,13 +128,17 @@ function drawScatter() {
     var xAxis = d3.svg.axis()
 	    .scale(x)
 	    .orient("bottom")
-	    .ticks(0)
+	    .ticks(4)
+	    .innerTickSize(-yAxisLen)
+	    .outerTickSize(0)
 	    .tickFormat("");
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left")
-	    .ticks(0)
+	    .ticks(2)
+	    .innerTickSize(-xAxisLen)
+	    .outerTickSize(0)
 	    .tickFormat("");
 
     var plotArea = div.append("svg");
@@ -247,7 +251,7 @@ function drawScatter() {
 		});
 		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
-  	
+
   	// onSliderEvent(1900, chart, x, y)
 }
 var gSlider = d3.slider()
@@ -256,7 +260,7 @@ var gSlider = d3.slider()
   .max(2005)
   .step(5)
   .on("slide", function(evt, value) {
-     change(value); 
+     change(value);
   }).animate(222);
 gSlider = gSlider.value(1900);
 d3.select('#slider').call(gSlider);

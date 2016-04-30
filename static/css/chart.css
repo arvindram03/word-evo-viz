@@ -32,6 +32,10 @@
   stroke: #eee;
 }
 
+.tick line {
+  opacity: 0.2
+}
+
 input[type="range"] {
   /*-webkit-appearance: none;*/
   background-color: #ddd;
