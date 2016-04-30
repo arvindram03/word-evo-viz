@@ -6,11 +6,11 @@ body {
 }
 .navbar-brand
 {
-    width: 100%;
+    /*width: 100%;
     left: 0;
     top: 0;
     text-align: center;
-    margin: auto;
+    margin: auto;*/
     color: #fff !important;
 }
 
@@ -23,10 +23,14 @@ body {
     color:#fff !important;
 }*/
 .navbar-inverse {
-    background-color: #5bc0de;
-    border-color: #5bc0de;
+    background-color: #5bc0de !important;
+    border-color: #5bc0de !important;
 }
 
+li a {
+    background-color: #5bc0de !important;
+    border-color: #5bc0de !important;   
+}
 .center-text {
     text-align: center;
 }
