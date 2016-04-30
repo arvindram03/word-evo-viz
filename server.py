@@ -25,76 +25,101 @@ def perform_kmeans(data, k=4):
 # 	db = DBSCAN(eps=0.3, min_samples=5).fit(cluster_data)
 # 	return db
 
-def check_outlier(model, data):
-	a = [data["2005"]["x"], data["2005"]["y"]]
-	dist = []
-	for i in xrange(len(model.cluster_centers_)):
-		b = model.cluster_centers_[i]
-		dist.append({str(i): str(np.linalg.norm(a-b))})
+@app.route('/outlier')
+def outlier_check():
+	words = get_all_words()
+	target_words = []
+	outlier_data = {}
+	for word in words:
+		count = 0
+		data, model = transform_word_data(word)
+		outlier_data[word] = []
+		for year in data["timeseries"]:
+			target = [data["timeseries"][year]["x"], data["timeseries"][year]["y"]]
+			target_dist_sum = 0
+			for i in xrange(len(model.cluster_centers_)):
+				c = model.cluster_centers_[i]
+				target_dist = np.linalg.norm(target-c)
+				points_dist = []
 
-	for i in range(0, len(model.cluster_centers_)):
-		for j in range(i+1, len(model.cluster_centers_)):
-			a = model.cluster_centers_[i]
-			b = model.cluster_centers_[j]
-			dist.append({str(i)+str(j) :str(np.linalg.norm(a-b))})
-	return dist
+				for point in data["other_words"]:
+					if int(point['c']) == i:
+						a = [point['x'], point['y']]
+						points_dist.append(np.linalg.norm(a-c))
 
+				target_dist_sum += target_dist
 
-@app.route('/word')
-def get_word_data():
-	query = request.args.get('q')
-	word_data_file = 'data/words/{}_points_filtered.pkl'.format(query)
+				if year == "2005":
+					# print i, target_dist, max(points_dist)
+					if target_dist >= max(points_dist):
+						count += 1
+
+			outlier_data[word].append({year: str(target_dist_sum)})
+
+		if count == 4:
+			target_words.append(word)
+
+	resp = {"outlier": outlier_data, "target_words": target_words}
+
+	return Response(response=json.dumps(resp), mimetype="application/json")
+
+def transform_word_data(word):
+	word_data_file = 'data/words/{}_points_filtered.pkl'.format(word)
 	word_data = pickle.load(open(word_data_file))
 	scaling_factor = 10
-
-	resp = {}
-	resp["word"] = word_data[0]
 
 	other_words = word_data[1]
 	other_coords = []
 	for word in other_words:
-		other_coords.append({"word":word[-1],"x":word[0]*scaling_factor,"y":word[1]*scaling_factor})
+		other_coords.append({	"word":word[-1],
+								"x":word[0]*scaling_factor,
+								"y":word[1]*scaling_factor})
 
 	model = perform_kmeans(other_coords)
 	# model = perform_dbscan(other_coords)
 	for i in xrange(len(other_coords)):
 		other_coords[i]['c'] = str(model.labels_[i])
-	resp["other_words"]	= other_coords
 
 	timeseries = word_data[2]
-	# word_coords = []
 	word_coords = {}
 	for year_data in timeseries:
-		# word_coords.append({"word":query,"year":int(year_data[0]),"x":year_data[1]*scaling_factor,"y":year_data[2]*scaling_factor})
-		# word_coords[year_data[0]] = (year_data[1],year_data[2])
-		word_coords[year_data[0]] = {"x":year_data[1]*scaling_factor,"y":year_data[2]*scaling_factor}
+		word_coords[year_data[0]] = {	"x":year_data[1]*scaling_factor,
+										"y":year_data[2]*scaling_factor}
 
-	resp["outlier"] = check_outlier(model, word_coords)
+	resp = {}
+	resp["word"] = word_data[0]
+	resp["other_words"]	= other_coords
 	resp["timeseries"]	= word_coords
 
+	return resp, model
+
+@app.route('/word')
+def get_word_data():
+	query = request.args.get('q')
+	resp, m = transform_word_data(query)
 	return Response(response=json.dumps(resp), mimetype="application/json")
 
-@app.route('/word_cloud')
-def get_word_cloud_weights():
+def get_all_words():
 	data_folder1 = "./data/sample"
 	data_folder2 = "./data/words"
 	files = {}
 	for subdirname in os.listdir(data_folder1):
-		files[subdirname.split("_")[0]] = randint(10,30)
+		if subdirname.find(".DS_") > -1:
+			continue
+		files[subdirname.split("_")[0]] = 1
 	for subdirname in os.listdir(data_folder2):
-		files[subdirname.split("_")[0]] = randint(10,30)
+		if subdirname.find(".DS_") > -1:
+			continue
+		files[subdirname.split("_")[0]] = 1
+	return files
 
+@app.route('/word_cloud')
+def get_word_cloud_weights():
+	files = get_all_words()
 	cloud = []
 	for key in files:
-		tmp = {}
-		tmp["text"] = key
-		tmp["size"] = files[key]
-		cloud.append(tmp)
-	# keys = files.keys()
-	# print len(files.keys())
-
+		cloud.append({"text": key, "size": randint(10,30)})
 	return Response(response=json.dumps(cloud), mimetype="application/json")
-	# return cloud
 
 @app.route('/')
 def index():
