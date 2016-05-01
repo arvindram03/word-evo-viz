@@ -58,6 +58,6 @@ var line = d3.svg.line()
   })
 
   // display the line by appending an svg:path element with the data line we created above
-  graph.append("svg:path").attr("d", line(data));
+  graph.append("svg:path").attr("class", "spark-path").attr("d", line(data));
 }
 
