@@ -55,9 +55,6 @@ li a {
     /*background: #fff;*/
 }
 
-
-
-
 .axisTitle,.title {
 	text-transform: capitalize;
 }
@@ -66,3 +63,14 @@ li a {
 	font-weight: bold;
 	font-size: 16px;
 }
+ 
+ .spark-plot {
+    width: 300px;
+    height: 75px;
+ }
+
+ path {
+    fill:  none;
+    stroke:steelblue;
+    stroke-width: 1;
+ }

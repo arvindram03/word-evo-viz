@@ -24,7 +24,8 @@ def perform_kmeans(data, k=4):
 # 	cluster_data = [[point["x"], point["y"]] for point in data]
 # 	db = DBSCAN(eps=0.3, min_samples=5).fit(cluster_data)
 # 	return db
-
+def getKey(obj):
+	return obj["x"]
 @app.route('/outlier')
 def outlier_check():
 	if os.path.exists("data/outlier.json"):
@@ -59,6 +60,7 @@ def outlier_check():
 						count += 1
 
 			outlier_data[word].append({"x": year, "y": str(target_dist_sum)})
+			outlier_data[word] = sorted(outlier_data[word], key=getKey)
 
 		if count == 4:
 			target_words.append(word)
