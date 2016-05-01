@@ -14,33 +14,21 @@ function fetchSparkData() {
   xhttp.send();
 }
 
-function drawSparks(id,offset, words) {
+function drawSparks(id, offset, words) {
 	var table = document.getElementById(id);
 	var tBody = table.tBodies[0];
-	var n = 0;
-	
-	// console.dir(tBody);
-	for (var word in words) {
-		data = words[word];
+
+	for (var i=offset; i < offset+10; i++) {
+		var data = words[i];
+    var word = data["word"];
 		var idStr = "spark-"+word;
 		var row = "<tr><td>"+word+"</td><td><div class='spark-plot' id="+idStr+"></div></td></tr>";
 		tBody.innerHTML += row;
-		drawSpark(idStr, data);
-		n += 1;
-		if (n > 10) {
-			break;
-		}
-	}	
+		drawSpark(idStr, data["points"]);
+	}
 }
 
-// function drawSpark(id, data) {
-// 	console.log("drawing function");
-// 	console.dir(data);
-
-// }
-
 function drawSpark(id, data) {
-// var dim = {height: div.style("height").slice(0,-2), width: div.style("width").slice(0,-2)};
 var div = d3.select("#"+id);
   // create an SVG element inside the #graph div that fills 100% of the div
 var graph = div.append("svg:svg").attr("width",div.style("width").slice(0,-2)).attr("height",div.style("height").slice(0,-2));
@@ -49,22 +37,22 @@ var graph = div.append("svg:svg").attr("width",div.style("width").slice(0,-2)).a
 // var data = [3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9];
 var x = d3.scale.linear().range([0, div.style("width").slice(0,-2)]);
 var y = d3.scale.linear().range([div.style("height").slice(0,-2), 0]);
-	
+
 x.domain([d3.min(data, function(d){return +d.x})-1, d3.max(data, function(d){return +d.x})+1]);
-y.domain([d3.min(data, function(d){return +d.y})-1, d3.max(data, function(d){return +d.y})+1]);	
+y.domain([d3.min(data, function(d){return +d.y})-1, d3.max(data, function(d){return +d.y})+1]);
 
 // create a line object that represents the SVN line we're creating
 var line = d3.svg.line()
   // assign the X function to plot our line as we wish
   .x(function(d,i) {
     // verbose logging to show what's actually being done
-    console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+    // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
     // return the X coordinate where we want to plot this datapoint
     return x(d.x);
   })
   .y(function(d) {
     // verbose logging to show what's actually being done
-    console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+    // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
     // return the Y coordinate where we want to plot this datapoint
     return y(d.y);
   })
