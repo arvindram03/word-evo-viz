@@ -1,4 +1,4 @@
-var timeDuration = 500;
+var timeDuration = 2000;
 function change(year, remove_path = false){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
@@ -76,13 +76,13 @@ function change(year, remove_path = false){
     	path.attr("stroke-dasharray", totalLength + " " + totalLength)
 			.attr("stroke-dashoffset", totalLength)
 			.transition()
-			.duration(222)
+			.duration(timeDuration)
 			.ease("basis")
 			.attr("stroke-dashoffset", 0);
     }
 	target
 		  .transition()
-		  .duration(222).ease("basis")
+		  .duration(timeDuration).ease("basis")
 		  .attr("transform", "translate("+ new_x + "," + new_y + ")");
 	target.select("text").text(function(d) {return chart.data.word + "," + year});
 };
