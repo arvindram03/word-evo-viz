@@ -13,90 +13,68 @@
 
 </head>
 <body>
-      <!-- <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Word Evolution Narration</a>
-        </div>
-      </nav> -->
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <!-- <div class="navbar-header"> -->
       <a class="navbar-brand">Word Evolution</a>
-    <!-- </div> -->
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a>Home </a></li>
         <li class="active"><a href="spark.html">Sparklines </a></li>
       </ul>
-      
-      <!-- <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul> -->
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 <div class="container-fluid">
     <div class="row col-lg-12">
-
-      <div class="col-lg-12">
-        <!-- <div class="slider"> -->
-        <div class="row">
         <div class="col-lg-3">
-          <h3 class="center-text">Pick or Type a Word</h3>
-          <div class="input-group">
-            <input type="text" class="form-control" id="word-input" placeholder="Type word like gay, tape, etc" value="">
-            <span class="input-group-btn">
-              <button class="btn btn-info btn-group-justified" type="button" onclick="wordInput();">Show</button>
-            </span>
-          </div>
-          <br>
-        </div>
-        <div class="col-lg-9">
-          <div class="col-lg-1">
-          <span class="form-group">
-            <button class="btn btn-info btn-group-justified" type="button" onclick="togglePlay();">
-            <span id = "play-button" class="glyphicon glyphicon-play" aria-hidden="true"></button>
-          </span>
-        </div>
-        <div class="col-lg-11">
           <div class="row">
-            <div id="slider"></div>
-          </div>
-          <br>
-          <br>
-          <div class="row">
-            <div id="eventWrap" class="event col-lg-4 bord">
-            <table>
-              <tr>
-              <td>
-                <img id="image"  height="80px" width="80px" border="0"/>
-              </td>
-              <td>
-                <span id="txt"></span>
-              </td>
-              </tr>
-            </table>
+            <h3 class="center-text">Pick or Type a Word</h3>
+            <div class="input-group">
+              <input type="text" class="form-control" id="word-input" placeholder="Type word like gay, tape, etc" value="">
+              <span class="input-group-btn">
+                <button class="btn btn-info btn-group-justified" type="button" onclick="wordInput();">Show</button>
+              </span>
             </div>
+            <br>
           </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        </div>
-        </div>
-
-
-        <div class="row">
-          <div class="col-lg-3">
+          <div class="row">
             <div class="wordCloud"></div>
           </div>
-          <div class="cluster-plot col-lg-9"></div>
         </div>
-      </div>
-
+        <div class="col-lg-9">
+          <div class="row">
+            <div class="col-lg-1">
+              <span class="form-group">
+                <button class="btn btn-info btn-group-justified" type="button" onclick="togglePlay();">
+                <span id = "play-button" class="glyphicon glyphicon-play" aria-hidden="true"></button>
+              </span>
+            </div>
+            <div class="col-lg-11">
+              <div class="row">
+                <div id="slider"></div>
+              </div>
+              <br>
+              <br>
+              <div class="row">
+                <div id="eventWrap" class="event col-lg-4 bord">
+                <table>
+                  <tr>
+                  <td>
+                    <img id="image"  height="80px" width="80px" border="0"/>
+                  </td>
+                  <td>
+                    <span id="txt"></span>
+                  </td>
+                  </tr>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="cluster-plot"></div>
+          </div>
+        </div>
       </div>
 </div>
  <script src="static/js/d3.slider.js"></script>

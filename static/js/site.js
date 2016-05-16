@@ -91,23 +91,18 @@ function increment() {
   gSlider.value(curYear);
   time = chart.data.timeseries;
   
-    var event = document.getElementById("eventWrap");
-    var leftV = document.getElementById("handle-one").style.left;
-    leftV = leftV.slice(0,-1);
+  var event = document.getElementById("eventWrap");
+  var leftV = document.getElementById("handle-one").style.left;
+  leftV = leftV.slice(0,-1);
     
-    
-    // $("#eventWrap").animate({opacity:1},1);
-    // event.style.left = ;
-    if (time[curYear].txt != "") {
-      $("#eventWrap").css({opacity:0});
-      $("#eventWrap").animate({opacity:1, left:leftV/1.45 + "%"},timeDuration);
-      document.getElementById("txt").innerHTML = time[curYear].txt;
-      document.getElementById("image").src = time[curYear].img;
-      // $("#eventWrap").animate({opacity:1},timeDuration/3);
-      // $("#eventWrap").animate({opacity:1},timeDuration/3);  
-    } else {
-      $("#eventWrap").animate({left:leftV/1.45 + "%"},timeDuration); 
-    }
+  if (time[curYear].txt != "") {
+    $("#eventWrap").css({opacity:0});
+    $("#eventWrap").animate({opacity:1, left:leftV/1.45 + "%"},timeDuration);
+    document.getElementById("txt").innerHTML = time[curYear].txt;
+    document.getElementById("image").src = time[curYear].img;
+  } else {
+    $("#eventWrap").animate({left:leftV/1.45 + "%"},timeDuration); 
+  }
 
   change(curYear);
   if(curYear == 2005) {
