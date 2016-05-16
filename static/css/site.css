@@ -92,6 +92,6 @@ li a {
 }
 
 table { 
-    border-spacing: 5px;
+    /*border-spacing: 5px;*/
     border-collapse: separate;
 }

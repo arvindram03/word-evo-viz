@@ -75,6 +75,13 @@ def outlier_check():
 
 	return Response(response=json.dumps(resp), mimetype="application/json")
 
+def get_events(word):
+	with open("data/events.json", "r") as f:
+		events = json.load(f)
+	if word in events:
+		return events[word]
+	return events["default"]
+
 def transform_word_data(word):
 	word_data_file = 'data/words/{}_points_filtered.pkl'.format(word)
 	word_data = pickle.load(open(word_data_file))
@@ -82,10 +89,10 @@ def transform_word_data(word):
 
 	other_words = word_data[1]
 	other_coords = []
-	for word in other_words:
-		other_coords.append({	"word":word[-1],
-								"x":word[0]*scaling_factor,
-								"y":word[1]*scaling_factor})
+	for w in other_words:
+		other_coords.append({	"word":w[-1],
+								"x":w[0]*scaling_factor,
+								"y":w[1]*scaling_factor})
 
 	model = perform_kmeans(other_coords)
 	# model = perform_dbscan(other_coords)
@@ -93,10 +100,19 @@ def transform_word_data(word):
 		other_coords[i]['c'] = str(model.labels_[i])
 
 	timeseries = word_data[2]
+	# print word
+	event_data = get_events(word)
 	word_coords = {}
 	for year_data in timeseries:
+		txt = ""
+		img = ""
+		if year_data[0] in event_data:
+			txt = event_data[year_data[0]]["txt"]
+			img = event_data[year_data[0]]["img"]
 		word_coords[year_data[0]] = {	"x":year_data[1]*scaling_factor,
-										"y":year_data[2]*scaling_factor}
+										"y":year_data[2]*scaling_factor,
+										"txt":txt,
+										"img":img}
 
 	resp = {}
 	resp["word"] = word_data[0]

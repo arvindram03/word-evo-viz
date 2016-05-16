@@ -97,9 +97,14 @@ function increment() {
   leftV = leftV.slice(0,-1);
   event.style.left = leftV/1.45 + "%";
   gSlider.value(curYear);
-  if (curYear % 10 == 5) {
+  time = chart.data.timeseries;
+    // console.dir(curYear);
+    // console.dir(time[curYear]);
+  if (time[curYear].txt != "") {
+    document.getElementById("txt").innerHTML = time[curYear].txt+" "+curYear;
+    document.getElementById("image").src = time[curYear].img;
     $("#eventWrap").animate({opacity:1},timeDuration/3);
-    $("#eventWrap").animate({opacity:1},timeDuration/3);
+    $("#eventWrap").animate({opacity:1},timeDuration/3);  
     $("#eventWrap").animate({opacity:0.001},timeDuration/3);
   }
   

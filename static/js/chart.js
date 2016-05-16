@@ -1,4 +1,4 @@
-var timeDuration = 2000;
+var timeDuration = 500;
 function change(year, remove_path = false){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
