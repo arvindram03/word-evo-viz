@@ -9,6 +9,30 @@
 			"img":"static/img/d3.png"
 		}
 	},
+	"mouse": {
+		"1900": {
+			"txt":"For a long time, the word 'mouse' was associated with kitten",
+			"img":"static/img/mouse_00.jpg"
+		},
+		"1995": {
+			"txt":"Wide acceptance of personal computers and major release of Microsoft, Windows'95 OS",
+			"img":"static/img/mouse_95.jpg"
+		},
+		"2000": {
+			"txt":"Boom of personal computers and transformation of meaning of mouse",
+			"img":"static/img/mouse_2k.png"
+		}
+	},
+	"tape": {
+		"1995": {
+			"txt":"Wide acceptance of personal computers and major release of Microsoft, Windows'95 OS",
+			"img":"static/img/mouse_95.jpg"
+		},
+		"2000": {
+			"txt":"Boom of personal computers and transformation of meaning of mouse",
+			"img":"static/img/mouse_2k.png"
+		}
+	},
 	"default":{}
 
 }
