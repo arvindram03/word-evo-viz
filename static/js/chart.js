@@ -98,18 +98,6 @@ function drawScatter() {
 	yAxisLen = (dim.height - margin.top - margin.bottom);
 	var x = d3.scale.linear().range([0, xAxisLen]);
 	var y = d3.scale.linear().range([yAxisLen, 0]);
-	// div.append("input")
-	//     		.attr("id","timeSlider")
-	//     		.attr("type","range")
-	//     		.attr("min",1900)
-	//     		.attr("max",2005)
-	//     		.attr("step",5)
-	//     		.attr("value",1900)
-	//     		.on("change",change)
-	//     		.style("width",xAxisLen+"px")
-	//     		.style("margin-top",(margin.top)/2+"px")
-	//     		.style("margin-left",(margin.left)+"px")
-	//     		.style("margin-bottom",(margin.bottom/8)+"px")
 	var points_data = [];
 	for(idx in chart.data.other_words) {
 		tmp = {};
@@ -161,23 +149,12 @@ function drawScatter() {
 	    .tickFormat("");
 
     var plotArea = div.append("svg");
-		// plotArea.append("g").append("text")
-		// 		.attr("class","axisTitle")
-	 //            .attr("text-anchor", "middle")
-	 //            .attr("transform", "translate("+ (margin.left/3) +","+(dim.height/2)+") rotate(-90)")
-	 //            .text(chart.yAxisTitle);
 
-	 //     plotArea.append("g").append("text")
-	 //     		.attr("class","axisTitle")
-	 //            .attr("text-anchor", "middle")
-	 //            .attr("transform", "translate("+ (dim.width/2) +","+(dim.height-(margin.bottom/2))+")")
-	 //            .text(chart.xAxisTitle);
-
-	    plotArea.append("g").append("text")
-	     		.attr("class","title")
-	            .attr("text-anchor", "start")
-	            .attr("transform", "translate("+ (xAxisLen/2) +","+margin.top/2+")")
-	            .text(chart.title);
+    plotArea.append("g").append("text")
+     		.attr("class","title")
+            .attr("text-anchor", "start")
+            .attr("transform", "translate("+ (xAxisLen/2) +","+margin.top/2+")")
+            .text(chart.title);
 
 	var plot = plotArea.attr("width", dim.width)
 	  					.attr("height", dim.height)
@@ -222,7 +199,6 @@ function drawScatter() {
   		.attr("r", function(d){
 			return 8;
 		});
-		// d3.select(this.childNodes[1]).style("visibility","visible")
   	});
 
   	target.on("mouseout",function(d){
@@ -230,17 +206,13 @@ function drawScatter() {
   		.attr("r", function(d){
 			return 5;
 		});
-		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
 
   	target.append("text")
-	  // .attr("x",function(d){return x(chart.data.timeseries["1900"].x);})
-	  // .attr("y",function(d){return y(chart.data.timeseries["1900"].y);})
 	  .attr("x", 0)
 	  .attr("y", 0)
 	  .attr("dx","0.5em")
 	  .attr("dy","-0.5em")
-	  // .style("visibility","hidden")
 	  .text(function(d) { return chart.data.word + "," + 1900; });
 
 	var points = plot.selectAll(".points")
@@ -267,7 +239,6 @@ function drawScatter() {
   		.attr("r", function(d){
 			return 8;
 		});
-		// d3.select(this.childNodes[1]).style("visibility","visible")
   	});
 
   	points.on("mouseout",function(d){
@@ -275,10 +246,8 @@ function drawScatter() {
   		.attr("r", function(d){
 			return 5;
 		});
-		// d3.select(this.childNodes[1]).style("visibility","hidden")
   	});
 
-  	// onSliderEvent(1900, chart, x, y)
 }
 var gSlider = d3.slider()
   .axis(d3.svg.axis().ticks(20).tickFormat(d3.format("d")))

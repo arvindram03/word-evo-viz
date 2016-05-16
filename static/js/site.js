@@ -18,9 +18,7 @@ function fetchTextClassData(word) {
                 "yAxisTitle":"newY",
                 "title":"Word Evolution ScatterPlot",
               };
-      // console.log(xhttp.responseText);
         drawScatter();
-        // togglePlay();
     }
   };
   xhttp.open("GET", "/word?q="+word, true);
@@ -29,7 +27,6 @@ function fetchTextClassData(word) {
 }
 
 function wordInput() {
-  // var textField = d3.select("#word-input");
   word = document.getElementById("word-input").value;
   fetchTextClassData(word);
 }
@@ -103,9 +100,9 @@ function increment() {
   if (time[curYear].txt != "") {
     document.getElementById("txt").innerHTML = time[curYear].txt+" "+curYear;
     document.getElementById("image").src = time[curYear].img;
-    $("#eventWrap").animate({opacity:1},timeDuration/3);
-    $("#eventWrap").animate({opacity:1},timeDuration/3);
     $("#eventWrap").animate({opacity:0.001},timeDuration/3);
+    $("#eventWrap").animate({opacity:1},timeDuration/3);
+    $("#eventWrap").animate({opacity:1},timeDuration/3);  
   }
 
   change(curYear);
