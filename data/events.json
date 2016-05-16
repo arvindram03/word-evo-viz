@@ -10,11 +10,11 @@
 		}
 	},
 	"mouse": {
-		"1900": {
+		"1905": {
 			"txt":"For a long time, the word 'mouse' was associated with kitten",
 			"img":"static/img/mouse_00.jpg"
 		},
-		"1995": {
+		"1990": {
 			"txt":"Wide acceptance of personal computers and major release of Microsoft, Windows'95 OS",
 			"img":"static/img/mouse_95.jpg"
 		},

@@ -3,7 +3,7 @@ var is_playing = false;
 var curYear = 1900;
 var interval;
 
-fetchTextClassData("god");
+fetchTextClassData("mouse");
 fetchWords();
 
 function fetchTextClassData(word) {
@@ -88,22 +88,26 @@ function stopAnimation() {
 
 function increment() {
   curYear += 5;
-
-  var event = document.getElementById("eventWrap");
-  var leftV = document.getElementById("handle-one").style.left;
-  leftV = leftV.slice(0,-1);
-  event.style.left = leftV/1.45 + "%";
   gSlider.value(curYear);
   time = chart.data.timeseries;
-    // console.dir(curYear);
-    // console.dir(time[curYear]);
-  if (time[curYear].txt != "") {
-    document.getElementById("txt").innerHTML = time[curYear].txt+" "+curYear;
-    document.getElementById("image").src = time[curYear].img;
-    $("#eventWrap").animate({opacity:0.001},timeDuration/3);
-    $("#eventWrap").animate({opacity:1},timeDuration/3);
-    $("#eventWrap").animate({opacity:1},timeDuration/3);  
-  }
+  
+    var event = document.getElementById("eventWrap");
+    var leftV = document.getElementById("handle-one").style.left;
+    leftV = leftV.slice(0,-1);
+    
+    
+    // $("#eventWrap").animate({opacity:1},1);
+    // event.style.left = ;
+    if (time[curYear].txt != "") {
+      $("#eventWrap").css({opacity:0});
+      $("#eventWrap").animate({opacity:1, left:leftV/1.45 + "%"},timeDuration);
+      document.getElementById("txt").innerHTML = time[curYear].txt;
+      document.getElementById("image").src = time[curYear].img;
+      // $("#eventWrap").animate({opacity:1},timeDuration/3);
+      // $("#eventWrap").animate({opacity:1},timeDuration/3);  
+    } else {
+      $("#eventWrap").animate({left:leftV/1.45 + "%"},timeDuration); 
+    }
 
   change(curYear);
   if(curYear == 2005) {
