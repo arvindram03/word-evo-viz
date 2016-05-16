@@ -91,7 +91,18 @@ function stopAnimation() {
 
 function increment() {
   curYear += 5;
+  
+  var event = document.getElementById("eventWrap");
+  var leftV = document.getElementById("handle-one").style.left;
+  leftV = leftV.slice(0,-1);
+  event.style.left = leftV/1.45 + "%";
   gSlider.value(curYear);
+  if (curYear % 10 == 5) {
+    $("#eventWrap").animate({opacity:1},timeDuration/3);
+    $("#eventWrap").animate({opacity:1},timeDuration/3);
+    $("#eventWrap").animate({opacity:0.001},timeDuration/3);
+  }
+  
   change(curYear);
   if(curYear == 2005) {
     stopAnimation();

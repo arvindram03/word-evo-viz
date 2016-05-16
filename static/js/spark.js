@@ -1,4 +1,5 @@
 fetchSparkData();
+var num_rows = 14;
 function fetchSparkData() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -6,8 +7,9 @@ function fetchSparkData() {
       // console.log(xhttp.responseText);
       words = JSON.parse(xhttp.responseText);
       drawSparks("table-sparkline-1",0,words['outlier']);
-      drawSparks("table-sparkline-2",10,words['outlier']);
-      drawSparks("table-sparkline-3",20,words['outlier']);
+      drawSparks("table-sparkline-2",num_rows*1,words['outlier']);
+      drawSparks("table-sparkline-3",num_rows*2,words['outlier']);
+      drawSparks("table-sparkline-4",num_rows*3,words['outlier']);
     }
   };
   xhttp.open("GET", "/outlier", true);
@@ -18,7 +20,7 @@ function drawSparks(id, offset, words) {
 	var table = document.getElementById(id);
 	var tBody = table.tBodies[0];
 
-	for (var i=offset; i < offset+10; i++) {
+	for (var i=offset; i < offset+num_rows; i++) {
 		var data = words[i];
     var word = data["word"];
 		var idStr = "spark-"+word;

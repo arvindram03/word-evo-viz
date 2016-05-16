@@ -1,4 +1,4 @@
-var timeDuration = 222;
+var timeDuration = 2000;
 function change(year, remove_path = false){
 						// drawForceGraph(chart,this.value);
 						// onSliderEvent(1900, chart, x, y);
@@ -287,6 +287,6 @@ var gSlider = d3.slider()
   .step(5)
   .on("slide", function(evt, value) {
      change(value, true);
-  }).animate(222);
+  }).animate(timeDuration);
 gSlider = gSlider.value(1900);
 d3.select('#slider').call(gSlider);
