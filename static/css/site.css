@@ -33,6 +33,7 @@ li a {
 }
 .center-text {
     text-align: center;
+    margin-top: 0px;
 }
 .navbar {
 	margin-top: 3px;
