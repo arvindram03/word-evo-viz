@@ -14,9 +14,17 @@
 			"txt":"For a long time, the word 'mouse' was associated with kitten",
 			"img":"static/img/mouse_00.jpg"
 		},
-		"1990": {
-			"txt":"Wide acceptance of personal computers and major release of Microsoft, Windows'95 OS",
-			"img":"static/img/mouse_95.jpg"
+		"1950": {
+			"txt":"Release of world famous movie 'The Pied Piper of Hamelin'",
+			"img":"static/img/mouse_50.jpg"
+		},
+		"1965": {
+			"txt": "Invention of mouse for computers",
+			"img": "static/img/mouse_65.jpeg"
+		},
+		"1985": {
+			"txt": "Walt Disney created Mickey Mouse",
+			"img": "static/img/mouse_85.jpg"
 		},
 		"2000": {
 			"txt":"Boom of personal computers and transformation of meaning of mouse",
@@ -24,13 +32,21 @@
 		}
 	},
 	"tape": {
-		"1995": {
-			"txt":"Wide acceptance of personal computers and major release of Microsoft, Windows'95 OS",
-			"img":"static/img/mouse_95.jpg"
+		"1905": {
+			"txt": "Originally, tape was associated with ribbon, necktie, etc",
+			"img": "static/img/tape_00.jpg"
+		},
+		"1930": {
+			"txt":"Invention of magnetic tape recorder",
+			"img":"static/img/tape_30.jpg"
+		},
+		"1970": {
+			"txt":"Wide spread of tape recorders among humans and thus change in context",
+			"img":"static/img/tape_70.jpg"
 		},
 		"2000": {
-			"txt":"Boom of personal computers and transformation of meaning of mouse",
-			"img":"static/img/mouse_2k.png"
+			"txt":"Tape being accepted as an audio device universally",
+			"img":"static/img/tape_2k.jpg"
 		}
 	},
 	"default":{}

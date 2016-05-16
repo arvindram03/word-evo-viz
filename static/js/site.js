@@ -61,6 +61,9 @@ function reset() {
   is_playing = false;
   curYear = 1900;
   gSlider.value(curYear);
+  $("#eventWrap").css({opacity:0, left: "0%"});
+  document.getElementById("txt").innerHTML = "";
+  document.getElementById("image").src = "";
   change(curYear);
 }
 
@@ -90,12 +93,12 @@ function increment() {
   curYear += 5;
   gSlider.value(curYear);
   time = chart.data.timeseries;
-  
+
     var event = document.getElementById("eventWrap");
     var leftV = document.getElementById("handle-one").style.left;
     leftV = leftV.slice(0,-1);
-    
-    
+
+
     // $("#eventWrap").animate({opacity:1},1);
     // event.style.left = ;
     if (time[curYear].txt != "") {
@@ -104,9 +107,9 @@ function increment() {
       document.getElementById("txt").innerHTML = time[curYear].txt;
       document.getElementById("image").src = time[curYear].img;
       // $("#eventWrap").animate({opacity:1},timeDuration/3);
-      // $("#eventWrap").animate({opacity:1},timeDuration/3);  
+      // $("#eventWrap").animate({opacity:1},timeDuration/3);
     } else {
-      $("#eventWrap").animate({left:leftV/1.45 + "%"},timeDuration); 
+      $("#eventWrap").animate({left:leftV/1.45 + "%"},timeDuration);
     }
 
   change(curYear);
